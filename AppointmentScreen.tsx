@@ -1,3 +1,5 @@
+{/* This file contains the code for the Appointment Screen. Due to the different "regions" of the screen, we defined each within the comments above the dedicated section*/}
+
 import React from 'react';
 import {
   View,
@@ -17,21 +19,22 @@ export default function App() {
     const safePadding = '5%';
 
     return (
-      <View style={styles.background}>
+      <View style={{flex: 1, width: '100%', height: '100%', backgroundColor: '#fff'}}>
         <ScrollView contentContainerStyle={{ paddingBottom: 20 }}>
+
           {/* Header */}
           <View style={{ padding: safePadding }}>
             <ImageBackground
               source={require('./assets/appointments_headerbg.png')}
-              style={styles.headerBox}
+              style={{padding: 10, backgroundColor: '#e0f7ff', width: 404, height: 155, borderRadius: 12, marginBottom: 20}}
               imageStyle={{ borderRadius: 12 }}
             >
-              <Text style={styles.title}>Welcome Back!</Text>
+              <Text style={{fontSize: 28, alignItems: 'left', fontWeight: 'bold'}}>Welcome Back!</Text>
             </ImageBackground>
           </View>
 
           {/* Popular Services */}
-          <View style={styles.grid}>
+          <View style={{flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between'}}>
             {[
               { icon: require('./assets/book.png'), title: "Book an appointment", subtitle: "Find a doctor" },
               { icon: require('./assets/consult.png'), title: "Request Consultation", subtitle: "Talk to a specialist" },
@@ -42,31 +45,26 @@ export default function App() {
                 key={index}
                 onPress={() => {}}
                 style={({ pressed }) => [
-                  styles.gridItem,
-                  pressed && { backgroundColor: '#e0e0e0' } // light gray on press
+                  {width: '47%', backgroundColor: '#fff', borderRadius: 10, padding: 10, marginBottom: 15, elevation: 2},
+                  pressed && { backgroundColor: '#e0e0e0' }
                 ]}
               >
                 <Image
                   source={item.icon}
-                  style={{
-                    width: 40,
-                    height: 40,
-                    marginBottom: 10,
-                    alignSelf: 'center'
-                  }}
+                  style={{width: 40, height: 40, marginBottom: 10, alignSelf: 'center'}}
                 />
-                <Text style={styles.gridTitle}>{item.title}</Text>
-                <Text style={styles.gridSubtitle}>{item.subtitle}</Text>
+                <Text style={{fontWeight: 'bold'}}>{item.title}</Text>
+                <Text style={{fontSize: 12, color: '#666'}}>{item.subtitle}</Text>
               </Pressable>
             ))}
           </View>
 
-
-          <Text style={{ paddingHorizontal: '5%', marginBottom: 8, fontWeight: 'bold' }}>
+          {/* Upcoming Appointment */}
+          <Text style={{paddingHorizontal: '5%', marginBottom: 8, fontWeight: 'bold'}}>
             You Have an Upcoming Appointment...
           </Text>
 
-          <View style={styles.appointmentWrapper}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: '5%', marginBottom: 20}}>
             <Image
               source={require('./assets/doctor_avatar.png')}
               style={{
@@ -75,10 +73,15 @@ export default function App() {
                   marginRight: 12}}
             />
 
-          <View style={styles.appointmentCard}>
-            <Text style={styles.appointmentTitle}>Dr. Akash Kumar</Text>
-            <Text style={styles.appointmentSubtitle}>Consultant Geriatrician</Text>
-            <Text style={styles.appointmentTime}>Wednesday, 7th April, 2:30 pm (30 mins)</Text>
+          <View style={{
+                flex: 1,
+                backgroundColor: '#d2f0ff',
+                borderRadius: 10,
+                padding: 12
+              }}>
+            <Text style={{fontWeight: 'bold'}}>Dr. Akash Kumar</Text>
+            <Text style={{fontStyle: 'italic', marginBottom: 5}}>Consultant Geriatrician</Text>
+            <Text style={{marginTop: 4, fontSize: 13, color: '#555'}}>Wednesday, 7th April, 2:30 pm (30 mins)</Text>
             </View>
           </View>
 
@@ -123,7 +126,11 @@ export default function App() {
           </ScrollView>
         </ScrollView>
 
-        <View style={styles.bottomBar}>
+
+
+        {/* Bottom Row */}
+        {/* Only the Home button works which is intentional as we are not making the ENTIRE app, only basic navigation */}
+        <View style={{flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', paddingVertical: 10, backgroundColor: '#ffffff', borderTopWidth: 1, borderTopColor: '#ddd'}}>
          {[
              { icon: require('./assets/home.png'), label: 'Home' },
              { icon: require('./assets/calendar.png'), label: 'Reminder' },
@@ -133,10 +140,10 @@ export default function App() {
              <Pressable
                key={index}
                onPress={() => navigation.navigate(item.label)}
-               style={styles.bottomBarItem}
+               style={{alignItems: 'center'}}
              >
-               <Image source={item.icon} style={styles.bottomBarIcon} />
-               <Text style={styles.bottomBarLabel}>{item.label}</Text>
+               <Image source={item.icon} style={{width: 24, height: 24, marginBottom: 4}} />
+               <Text style={{fontSize: 12, color: '#444',}}>{item.label}</Text>
              </Pressable>
             ))}
           </View>
@@ -147,98 +154,6 @@ export default function App() {
 
 
 const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-    width: '100%',
-    height: '100%',
-    backgroundColor: '#fff',
-  },
-
-  title: {
-      fontSize: 28,
-      alignItems: 'left',
-      fontWeight: 'bold',
-  },
-
-  headerBox: {
-    padding: 10,
-    backgroundColor: '#e0f7ff',
-    width: 404,
-    height: 155,
-    borderRadius: 12,
-    marginBottom: 20,
-  },
-
-  sectionTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 10,
-  },
-
-  grid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-  },
-
-  gridItem: {
-    width: '47%',
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    padding: 10,
-    marginBottom: 15,
-    elevation: 2,
-  },
-
-  gridTitle: {
-    fontWeight: 'bold',
-  },
-
-  gridSubtitle: {
-    fontSize: 12,
-    color: '#666',
-  },
-
-  appointmentWrapper: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: '5%',
-    marginBottom: 20,
-  },
-
-  appointmentCard: {
-    flex: 1,
-    backgroundColor: '#d2f0ff',
-    borderRadius: 10,
-    padding: 12,
-  },
-
-  appointmentImage: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    marginRight: 15,
-  },
-
-  appointmentText: {
-    flex: 1,
-  },
-
-  appointmentTitle: {
-    fontWeight: 'bold',
-  },
-
-  appointmentSubtitle: {
-    fontStyle: 'italic',
-    marginBottom: 5,
-  },
-
-  appointmentTime: {
-    marginTop: 4,
-    fontSize: 13,
-    color: '#555',
-  },
-
   doctorCard: {
     width: 140,
     marginRight: 15,
@@ -255,30 +170,5 @@ const styles = StyleSheet.create({
     borderRadius: 40,
     marginBottom: 10,
   },
-
-  bottomBar: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    paddingVertical: 10,
-    backgroundColor: '#ffffff',
-    borderTopWidth: 1,
-    borderTopColor: '#ddd',
-  },
-
-  bottomBarItem: {
-    alignItems: 'center',
-  },
-
-  bottomBarIcon: {
-    width: 24,
-    height: 24,
-    marginBottom: 4,
-  },
-
-  bottomBarLabel: {
-    fontSize: 12,
-    color: '#444',
-  }
 
 });
