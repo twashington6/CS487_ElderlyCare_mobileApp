@@ -1,3 +1,7 @@
+This is a project for CS487: a prototype of our group's proposed "ElderyCare" app. Instructions for React Native as seen below.
+
+
+
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
 # Getting Started
